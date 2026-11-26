@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#05010f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>NEON HORIZON — 3D</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.js",
+      "three/addons/": "./vendor/addons/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <div id="vignette"></div>
+  <div id="hitFlash"></div>
+  <div id="combo"></div>
+
+  <div id="ui" class="hidden">
+    <div class="hud-top">
+      <div class="hud-left">
+        <div id="score">000000</div>
+        <div id="dist">0 м</div>
+      </div>
+      <div class="hud-center">
+        <span id="mult">x1</span>
+        <div class="crystal-count"><span class="gem"></span><span id="crystals">0</span></div>
+      </div>
+      <div class="hud-right">
+        <div id="shields">
+          <span class="shield-dot"></span><span class="shield-dot"></span><span class="shield-dot"></span><span class="shield-dot"></span>
+        </div>
+        <div class="icon-btns">
+          <button id="btnSound" aria-label="Звук">🔊</button>
+          <button id="btnPause" aria-label="Пауза">⏸</button>
+        </div>
+      </div>
+    </div>
+    <div class="hud-bottom">
+      <div id="speedo">
+        <div id="speedBar"><div id="speedFill"></div></div>
+        <div id="speedVal">0 км/ч</div>
+      </div>
+      <div id="boostBtn"><div id="boostFill"></div><span>BOOST</span></div>
+    </div>
+  </div>
+
+  <div id="menu" class="overlay">
+    <div class="panel">
+      <h1 class="title">NEON<br>HORIZON</h1>
+      <p class="subtitle">Неоновый каньон · бесконечный полёт</p>
+      <div id="bestMenu" class="best">РЕКОРД: 0</div>
+      <button id="btnStart" class="btn primary">ИГРАТЬ</button>
+      <div class="qrow">
+        <span class="qlabel">ГРАФИКА</span>
+        <button class="qbtn" data-q="low">LOW</button>
+        <button class="qbtn" data-q="med">MED</button>
+        <button class="qbtn" data-q="high">HIGH</button>
+      </div>
+      <p class="hint">Свайп — полёт · Кнопка BOOST — ускорение<br>WASD / стрелки и SHIFT на клавиатуре</p>
+    </div>
+  </div>
+
+  <div id="pauseOv" class="overlay hidden">
+    <div class="panel">
+      <h2 class="title2">ПАУЗА</h2>
+      <button id="btnResume" class="btn primary">ПРОДОЛЖИТЬ</button>
+      <button id="btnMenuFromPause" class="btn">В МЕНЮ</button>
+    </div>
+  </div>
+
+  <div id="overOv" class="overlay hidden">
+    <div class="panel">
+      <div id="newRecord" class="record hidden">НОВЫЙ РЕКОРД!</div>
+      <h2 class="title2">ПОЛЁТ ОКОНЧЕН</h2>
+      <div class="stats">
+        <div class="stat"><span id="finalScore">0</span><label>ОЧКИ</label></div>
+        <div class="stat"><span id="finalDist">0 м</span><label>ДИСТАНЦИЯ</label></div>
+        <div class="stat"><span id="finalCrystals">0</span><label>КРИСТАЛЛЫ</label></div>
+      </div>
+      <div id="overBest" class="best">РЕКОРД: 0</div>
+      <button id="btnRetry" class="btn primary">ЗАНОВО</button>
+      <button id="btnMenuFromOver" class="btn">В МЕНЮ</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
