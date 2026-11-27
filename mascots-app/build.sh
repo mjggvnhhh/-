@@ -7,6 +7,10 @@ JDK="$TOOLCHAIN/jdk-17.0.21.1+2"
 PATH="$JDK/bin:$PATH"
 cd "$(dirname "$0")"
 
+VERSION_CODE=2
+VERSION_NAME=1.1
+OUT="AiMascots_v${VERSION_NAME}.apk"
+
 rm -rf build
 mkdir -p build/gen build/obj build/apk
 
@@ -19,8 +23,8 @@ mkdir -p build/gen build/obj build/apk
     --auto-add-overlay \
     --min-sdk-version 26 \
     --target-sdk-version 33 \
-    --version-code 1 \
-    --version-name 1.0
+    --version-code "$VERSION_CODE" \
+    --version-name "$VERSION_NAME"
 
 javac -source 8 -target 8 \
     -bootclasspath "$PLATFORM:$BT/core-lambda-stubs.jar" \
@@ -52,5 +56,8 @@ keytool -genkeypair -keystore build/debug.keystore -storepass android \
 "$BT/zipalign" -f 4 build/unsigned.apk build/aligned.apk
 "$BT/apksigner" sign --ks build/debug.keystore --ks-pass pass:android \
     --key-pass pass:android --v1-signing-enabled true --v2-signing-enabled true \
-    --out AiMascots.apk build/aligned.apk
-"$BT/apksigner" verify AiMascots.apk && echo "BUILD OK: AiMascots.apk"
+    --out "$OUT" build/aligned.apk
+"$BT/apksigner" verify --verbose "$OUT" | head -8
+"$BT/zipalign" -c 4 "$OUT" && echo "ALIGN OK"
+"$BT/aapt2" dump badging "$OUT" | grep -E "package:|sdkVersion|targetSdkVersion"
+echo "BUILD OK: $OUT ($(wc -c < "$OUT") bytes)"
