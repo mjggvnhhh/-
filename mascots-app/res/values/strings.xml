@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AI Mascots</string>
+    <string name="notif_title">AI Mascots бегают по экрану</string>
+    <string name="notif_text">Тап по маскоту — привет. Кнопки в уведомлении — смена маскота.</string>
+    <string name="need_overlay">Нужно разрешение «поверх других окон»</string>
+    <string name="btn_grant">Разрешить поверх окон</string>
+    <string name="btn_start">Запустить маскотов</string>
+    <string name="btn_stop">Остановить</string>
+    <string name="status_running">Маскот гуляет по экрану</string>
+    <string name="status_stopped">Маскоты остановлены</string>
+    <string name="action_prev">Назад</string>
+    <string name="action_next">Вперёд</string>
+    <string name="action_stop">Стоп</string>
+</resources>
