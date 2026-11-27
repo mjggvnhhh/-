@@ -16,7 +16,11 @@ mkdir -p build/gen build/obj build/apk
     --manifest AndroidManifest.xml \
     -R build/res.zip \
     --java build/gen \
-    --auto-add-overlay
+    --auto-add-overlay \
+    --min-sdk-version 26 \
+    --target-sdk-version 33 \
+    --version-code 1 \
+    --version-name 1.0
 
 javac -source 8 -target 8 \
     -bootclasspath "$PLATFORM:$BT/core-lambda-stubs.jar" \
@@ -47,5 +51,6 @@ keytool -genkeypair -keystore build/debug.keystore -storepass android \
 
 "$BT/zipalign" -f 4 build/unsigned.apk build/aligned.apk
 "$BT/apksigner" sign --ks build/debug.keystore --ks-pass pass:android \
-    --key-pass pass:android --out AiMascots.apk build/aligned.apk
+    --key-pass pass:android --v1-signing-enabled true --v2-signing-enabled true \
+    --out AiMascots.apk build/aligned.apk
 "$BT/apksigner" verify AiMascots.apk && echo "BUILD OK: AiMascots.apk"
