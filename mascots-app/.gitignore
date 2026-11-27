@@ -1,1 +1,3 @@
 build/
+mascots-app/build/
+*.idsig
